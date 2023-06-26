@@ -13,9 +13,9 @@ import si from '../../locales/si.js';
 
 export default function Map({ navigation,route }) {
  
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode]   = useState(false);
 
-  const [language, setLanguage] = useState(route.params?.selectedLanguage || 'en');
+  const [language, setLanguage]       = useState(route.params?.selectedLanguage || 'en');
   
   const messages = {
     en,
@@ -23,13 +23,13 @@ export default function Map({ navigation,route }) {
     si,
   };
 
-  const currentMessages = messages[language];
+  const currentMessages               = messages[language];
 
   const [region, setRegion] = useState({
-    latitude: 6.584748,
-    longitude: 80.1996578,
-    latitudeDelta: 0.0089,
-    longitudeDelta: 0.9098,
+    latitude                          : 6.584748,
+    longitude                         : 80.1996578,
+    latitudeDelta                     : 0.0089,
+    longitudeDelta                    : 0.9098,
   });
 
   useEffect(() => {
@@ -41,8 +41,8 @@ export default function Map({ navigation,route }) {
   useEffect(() => {
     async function loadFonts() {
       await Font.loadAsync({
-        'Poppins-Regular': require('../../assets/Fonts/Poppins-Regular.ttf'),
-        'Poppins-Bold': require('../..//assets/Fonts/Poppins-Bold.ttf'),
+        'Poppins-Regular'             : require('../../assets/Fonts/Poppins-Regular.ttf'),
+        'Poppins-Bold'                : require('../..//assets/Fonts/Poppins-Bold.ttf'),
       });
     }
 
@@ -51,19 +51,19 @@ export default function Map({ navigation,route }) {
 
   useEffect(() => {
     navigation.setOptions({
-      title:currentMessages.contact, // Set Header Title
-      headerTintColor: isDarkMode ? 'white' : 'darkblue',
+      title                           : currentMessages.contact,
+      headerTintColor                 : isDarkMode ? 'white' : 'darkblue',
       headerStyle: {
-        backgroundColor: isDarkMode ? 'grey' : 'white'
+        backgroundColor               : isDarkMode ? 'grey' : 'white'
       },
       headerTitleStyle: {
-        fontWeight: 'bold', // Set font weight of navigation bar
-        fontFamily: 'Poppins-Regular',
-        fontSize: language === 'en' ? 30 : 20,
+        fontWeight                    : 'bold',
+        fontFamily                    : 'Poppins-Regular',
+        fontSize                      : language === 'en' ? 30 : 20,
       },
-      headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-          <FontAwesome5 name="home" size={25} color={ isDarkMode? 'white' : "darkblue"} style={styles.icon} />
+      headerRight                     : () => (
+        <TouchableOpacity onPress     = {() => navigation.navigate("Home")}>
+          <FontAwesome5 name          = "home" size={25} color={ isDarkMode? 'white' : "darkblue"} style={styles.icon} />
         </TouchableOpacity>
       ),
     });
@@ -74,18 +74,18 @@ export default function Map({ navigation,route }) {
   }
 
   return (
-    <SafeAreaView style={[styles.container,isDarkMode && darkStyles.container]}>
+    <SafeAreaView style               = {[styles.container,isDarkMode && darkStyles.container]}>
       <MapView
-        style={styles.map}
-        initialRegion={region}
-        scrollEnabled={true}
+        style                         = {styles.map}
+        initialRegion                 = {region}
+        scrollEnabled                 = {true}
       />
 
-      <View style={styles.overlay}>
+      <View style                     = {styles.overlay}>
       
-        <TouchableOpacity onPress={() => handleEmergencyCall('1969')} style={styles.emergencyButton}>
-          <FontAwesome5 name="phone" size={25} color="white" style={styles.emergencyIcon} />
-          <Text style={styles.emergencyText}>{currentMessages.expresswayhot}</Text>
+        <TouchableOpacity onPress     = {() => handleEmergencyCall('1969')} style={styles.emergencyButton}>
+          <FontAwesome5 name          = "phone" size={25} color="white" style={styles.emergencyIcon} />
+          <Text style                 = {styles.emergencyText}>{currentMessages.expresswayhot}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -94,59 +94,59 @@ export default function Map({ navigation,route }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    flex                              : 1,
+    backgroundColor                   : '#fff',
+    alignItems                        : 'center',
+    justifyContent                    : 'flex-end',
   },
   icon: {
-    marginRight: 10,
+    marginRight                       : 10,
   },
   text1: {
-    flex: 0,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    fontSize: 30,
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex                              : 0,
+    backgroundColor                   : '#fff',
+    justifyContent                    : 'center',
+    fontSize                          : 30,
+    textAlign                         : 'center',
+    alignItems                        : 'center',
+    justifyContent                    : 'center',
   },
   map: {
     ...StyleSheet.absoluteFillObject,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderBottomColor: '#ccc',
+    borderRadius                      : 5,
+    borderWidth                       : 1,
+    borderColor                       : '#ccc',
+    borderBottomColor                 : '#ccc',
   },
   overlay: {
-    position: 'absolute',
-    bottom: 30,
-    right: 26,
+    position                          : 'absolute',
+    bottom                            : 30,
+    right                             : 26,
   },
   emergencyButton: {
-    flexDirection: 'row',
-    backgroundColor: 'red',
-    borderRadius: 16,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection                     : 'row',
+    backgroundColor                   : 'red',
+    borderRadius                      : 16,
+    paddingHorizontal                 : 16,
+    paddingVertical                   : 8,
+    alignItems                        : 'center',
+    justifyContent                    : 'center',
   },
   emergencyIcon: {
-    marginRight: 8,
+    marginRight                       : 8,
   },
-  emergencyText: {color: 'white',
-  fontSize: 20,
-  fontWeight: 'bold',
+  emergencyText                       : {color: 'white',
+  fontSize                            : 20,
+  fontWeight                          : 'bold',
 },
 emergencyIcon: {
-marginRight: 10,
+marginRight                           : 10,
 },
 });
 
 const darkStyles = StyleSheet.create({
   container: {
-    backgroundColor: '#333333',
-    // other dark styles...
+    backgroundColor                   : '#333333',
+    
   },
 });

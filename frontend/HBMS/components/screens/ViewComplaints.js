@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, LayoutAnimation,Alert, TextInput } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons'; // import the FontAwesome icon library
+import { FontAwesome } from '@expo/vector-icons'; 
 import { Clipboard } from 'react-native';
 import { Linking } from 'react-native';
 import LottieView from 'lottie-react-native';
@@ -60,14 +60,14 @@ const ViewComplaints = ({ navigation,route }) => {
 
     useEffect(() => {
         navigation.setOptions({
-          title                                           : "View Complains", // Set Header Title
+          title                                           : "View Complains",
           headerTintColor                                 : isDarkMode ? 'white' : 'darkblue',
           headerStyle: {
             backgroundColor                               : isDarkMode ? 'grey' : 'white'
           },
           headerTitleStyle: {
-            fontWeight                                    : "bold", // Set font weight of navigation bar
-            fontFamily                                    : "Poppins-Bold", // Set font family of navigation bar
+            fontWeight                                    : "bold",
+            fontFamily                                    : "Poppins-Bold",
             fontSize                                      : language === 'en' ? 25 : 20,
           },
           headerRight                                     : () => (
@@ -117,7 +117,7 @@ const ViewComplaints = ({ navigation,route }) => {
     const toggleComplaintDetails = (key) => {
       LayoutAnimation.easeInEaseOut();
       setExpanded((prevExpanded) => ({ ...prevExpanded, [key]: !prevExpanded[key] }));
-      // update the height of the itemDetails view
+      
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
       const height                                        = expanded[key] ? 0 : 'auto';
       setItemDetailsHeight((prevItemDetailsHeight) => ({ ...prevItemDetailsHeight, [key]: height }));
@@ -140,7 +140,7 @@ const ViewComplaints = ({ navigation,route }) => {
     fetch('http://192.168.8.141:4000/api/data')
       .then(response => response.json())
       .then(data => {
-        // sort the data by date and reverse the array
+        
         data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setComplaints(data);
         setLoading(false);
@@ -460,7 +460,7 @@ const styles = StyleSheet.create({
   const darkStyles = StyleSheet.create({
     container: {
       backgroundColor                                     : '#333333',
-      // other dark styles...
+      
     },
   });
   

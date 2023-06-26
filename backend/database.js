@@ -34,6 +34,84 @@ const logSchema = new Schema({
   createdAt               : { type: Date, default: Date.now }
 });
 
+// Create the English FAQ schema
+const faqSchema = new Schema({
+  question: {
+    type                  : String,
+    required              : true,
+  },
+  answer: {
+    type                  : String,
+    required              : true,
+  },
+});
+
+// Create the Sinhala FAQ schema
+const sifaqSchema = new Schema({
+  question: {
+    type                  : String,
+    required              : true,
+  },
+  answer: {
+    type                  : String,
+    required              : true,
+  },
+});
+
+// Create the Tamil FAQ schema
+const tafaqSchema = new Schema({
+  question: {
+    type                  : String,
+    required              : true,
+  },
+  answer: {
+    type                  : String,
+    required              : true,
+  },
+});
+
+
+// Create English EnContacts schema
+
+const encontactsSchema = new Schema({
+
+  name                    : { type: String, required: true },
+  phone                   : { type: String, required: true },
+  latitude                : { type: Number },
+  longitude               : { type: Number },
+
+});
+
+// Create Sinhala EnContacts schema
+
+const sicontactsSchema = new Schema({
+
+  name                    : { type: String, required: true },
+  phone                   : { type: String, required: true },
+  latitude                : { type: Number },
+  longitude               : { type: Number },
+
+});
+
+// Create Tamil EnContacts schema
+
+const tacontactsSchema = new Schema({
+
+  name                    : { type: String, required: true },
+  phone                   : { type: String, required: true },
+  latitude                : { type: Number },
+  longitude               : { type: Number },
+
+});
+
 // Define model for your collection
 export const Complaint    = mongoose.model('Complaint', complainSchema);
 export const Log          = mongoose.model('Log', logSchema);
+
+export const FAQ          = mongoose.model('FAQ', faqSchema);
+export const SiFAQ        = mongoose.model('SiFAQ', sifaqSchema);
+export const TaFAQ        = mongoose.model('TaFAQ', tafaqSchema);
+
+export const EnContacts   = mongoose.model('EnContacts', encontactsSchema);
+export const SiContacts   = mongoose.model('SiContacts', sicontactsSchema);
+export const TaContacts   = mongoose.model('TaContacts', tacontactsSchema);

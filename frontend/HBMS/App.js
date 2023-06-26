@@ -12,6 +12,8 @@ import LottieView from "lottie-react-native";
 import Faq from "./components/screens/Faq";
 import * as Font from "expo-font";
 
+
+
 const Stack                     = createNativeStackNavigator();
 
 function SplashScreen() {
@@ -40,7 +42,7 @@ function SplashScreen() {
 
 async function loadFonts() {
   await Font.loadAsync({
-    // load your fonts here
+    
   });
 }
 
@@ -51,7 +53,7 @@ export default function App() {
     loadFonts().then(() => {
       setTimeout(() => {
         setLoading(false);
-      }, 5000); // replace with your desired duration for the splash screen
+      }, 5000); 
     });
   }, []);
 
@@ -59,17 +61,21 @@ export default function App() {
     return <SplashScreen />;
   }
 
+
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name      = "Home" component={HomeScreen} />
-        <Stack.Screen name      = "Map" component={Map} />
-        <Stack.Screen name      = "Contact" component={Contact} />
-        <Stack.Screen name      = "Help_Support" component={HelpSupport} />
-        <Stack.Screen name      = "Complain" component={Complain} />
-        <Stack.Screen name      = "Faq" component={Faq} />
-        <Stack.Screen name      = "ViewComplaints" component={ViewComplaints} />
-      </Stack.Navigator>
-    </NavigationContainer>
+   
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name    = "Home" component={HomeScreen} />
+          <Stack.Screen name    = "Map" component={Map} />
+          <Stack.Screen name    = "Contact" component={Contact} />
+          <Stack.Screen name    = "Help_Support" component={HelpSupport} />
+          <Stack.Screen name    = "Complain" component={Complain} />
+          <Stack.Screen name    = "Faq" component={Faq} />
+          <Stack.Screen name    = "ViewComplaints" component={ViewComplaints} />
+        </Stack.Navigator>
+      </NavigationContainer>
+  
   );
 }

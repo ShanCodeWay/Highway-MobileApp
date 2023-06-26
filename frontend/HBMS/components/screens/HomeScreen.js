@@ -6,6 +6,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Circles  from '../../Data/Circles.js';
 import { useColorScheme } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 
 
 import * as Font from 'expo-font';
@@ -84,6 +85,43 @@ const HomeScreen = ({ navigation, }) => {
     setIsDarkMode(!isDarkMode);
   };
 
+
+  const animations = {
+    bounce: 'bounce',
+    fadeIn: 'fadeIn',
+    bounce: 'bounce',
+  flash: 'flash',
+  pulse: 'pulse',
+  rotate: 'rotate',
+  shake: 'shake',
+  swing: 'swing',
+  rubberBand: 'rubberBand',
+  bounceIn: 'bounceIn',
+  bounceInDown: 'bounceInDown',
+  bounceInUp: 'bounceInUp',
+  bounceInLeft: 'bounceInLeft',
+  bounceInRight: 'bounceInRight',
+  fadeIn: 'fadeIn',
+  fadeInDown: 'fadeInDown',
+  fadeInUp: 'fadeInUp',
+  fadeInLeft: 'fadeInLeft',
+  fadeInRight: 'fadeInRight',
+  flipInX: 'flipInX',
+  flipInY: 'flipInY',
+  lightSpeedIn: 'lightSpeedIn',
+  slideInDown: 'slideInDown',
+  slideInUp: 'slideInUp',
+  slideInLeft: 'slideInLeft',
+  slideInRight: 'slideInRight',
+  zoomIn: 'zoomIn',
+  zoomInDown: 'zoomInDown',
+  zoomInUp: 'zoomInUp',
+  zoomInLeft: 'zoomInLeft',
+  zoomInRight: 'zoomInRight',
+  hinge: 'hinge',
+  rollIn: 'rollIn',
+    // Add more animations here
+  };
   const loadFonts = async () => {
     try {
       await Font.loadAsync({
@@ -260,18 +298,22 @@ const LanguageSelector = ({ selectedLanguage, onLanguageChange }) => {
 
 
      <View style                                        = {styles.logoContainer}>
+   
         <Image
           source                                        = {require('../../assets/logo.png')}
           style                                         = {styles.logo}
 
           resizeMode                                    = "contain"
         />
+      
       </View>
-
+      
       <View style                                       = {styles.buttonContainer}>
       <View style                                       = {styles.greetingContainer}>
       <Text style                                       = {styles.greeting}>{currentMessages.greeting}</Text>
        </View>
+
+       <Animatable.View animation={animations.pulse} iterationCount="infinite"> 
       <TouchableOpacity
               style={[
                 styles.button,
@@ -298,7 +340,10 @@ const LanguageSelector = ({ selectedLanguage, onLanguageChange }) => {
           />
           <Text style                                   = {styles.buttonText}>{currentMessages.findcontact}</Text>
         </TouchableOpacity>
+       </Animatable.View>
 
+
+       <Animatable.View animation={animations.pulse} iterationCount="infinite"> 
         <TouchableOpacity
           style                                         = {[styles.button, styles.viewAllButton,
             {
@@ -314,15 +359,23 @@ const LanguageSelector = ({ selectedLanguage, onLanguageChange }) => {
             },
           ]}
           onPress                                       = {() => navigation.navigate('Contact', { isDarkMode, selectedLanguage: language })}>
+          
+          
+
           <FontAwesome
             name                                        = "th-list"
             size                                        = {24}
             color                                       = "darkblue"
             style                                       = {styles.buttonIcon}
           />
+         
           <Text style                                   = {styles.buttonText}>{currentMessages.viewall}</Text>
         </TouchableOpacity>
+        </Animatable.View>
 
+
+        <Animatable.View animation={animations.pulse} iterationCount="infinite"> 
+        
         <TouchableOpacity
           style                                         = {[styles.button, styles.helpButton,
             {
@@ -338,14 +391,20 @@ const LanguageSelector = ({ selectedLanguage, onLanguageChange }) => {
             },
           ]}
           onPress                                       = {() => navigation.navigate('Help_Support', { isDarkMode, selectedLanguage: language })}>
+          
+         
           <FontAwesome
             name                                        = "question-circle"
             size                                        = {24}
             color                                       = "darkblue"
             style                                       = {styles.buttonIcon}
           />
+         
           <Text style                                   = {styles.buttonText}>{currentMessages.help}</Text>
         </TouchableOpacity>
+        </Animatable.View>
+
+        <Animatable.View animation={animations.pulse} iterationCount="infinite"> 
 
         <TouchableOpacity
           style                                         = {[styles.button, styles.complainButton,
@@ -394,6 +453,7 @@ const LanguageSelector = ({ selectedLanguage, onLanguageChange }) => {
           />
           <Text style                                   = {styles.buttonText}>{currentMessages.faq}</Text>
         </TouchableOpacity>
+        </Animatable.View>
       </View>
     </SafeAreaView>
   );

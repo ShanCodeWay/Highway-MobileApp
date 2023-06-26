@@ -6,6 +6,7 @@ import { FontAwesome5 } from 'react-native-vector-icons';
 import Circles  from '../../Data/Circles.js';
 import {questions} from '../../Data/questions.js';
 import * as Font from 'expo-font';
+import axios from 'axios';
 
 import en from '../../locales/en.js';
 import ta from '../../locales/ta.js';
@@ -13,12 +14,12 @@ import si from '../../locales/si.js';
 
 export default function FAQ({ navigation,route  }) {
 
-  
   const [fontLoaded, setFontLoaded]   = useState(false);
-  const [expanded, setExpanded]       = useState(new Array(questions.length).fill(false)); // set initial state of expanded array to false for all questions
+  const [expanded, setExpanded]       = useState(new Array(questions.length).fill(false));
   const [isDarkMode, setIsDarkMode]   = useState(false);
   const [language, setLanguage]       = useState(route.params?.selectedLanguage || 'en');
-  
+  const [faqData, setFaqData]         = useState([]);
+
   const messages = {
     en,
     ta,
@@ -26,10 +27,6 @@ export default function FAQ({ navigation,route  }) {
   };
 
   const currentMessages               = messages[language];
-
- 
-
-
 
   useEffect(() => {
     if (route.params?.isDarkMode !== undefined) {
@@ -43,7 +40,7 @@ export default function FAQ({ navigation,route  }) {
         'Poppins-Regular'             : require('../../assets/Fonts/Poppins-Regular.ttf'),
         'Poppins-Bold'                : require('../../assets/Fonts/Poppins-Bold.ttf'),
       });
-      setFontLoaded(true); // set fontLoaded state to true after fonts are loaded
+      setFontLoaded(true); 
     }
 
     loadFonts();
@@ -51,14 +48,14 @@ export default function FAQ({ navigation,route  }) {
 
   useEffect(() => {
     navigation.setOptions({
-      title                           : 'FAQ', // Set Header Title
+      title                           : currentMessages.faq,
       headerTintColor                 : isDarkMode ? 'white' : 'darkblue',
       headerStyle: {
         backgroundColor               : isDarkMode ? 'grey' : 'white'
       },
       headerTitleStyle: {
-        fontWeight                    : 'bold', // Set font weight of navigation bar
-        fontFamily                    : 'Poppins-Bold', // Set font family of navigation bar
+        fontWeight                    : 'bold',
+        fontFamily                    : 'Poppins-Bold',
         fontSize                      : language === 'en' ? 30 : 20,
       },
       headerRight                     : () => (
@@ -69,13 +66,33 @@ export default function FAQ({ navigation,route  }) {
     });
   }, [navigation,isDarkMode]);
 
+  useEffect(() => {
+    let url;
+    if (language === 'si') {
+      url                             = 'http://192.168.8.141:4000/api/SiFAQ';
+    } else if (language === 'ta') {
+      url                             = 'http://192.168.8.141:4000/api/TaFAQ';
+    } else {
+      url                             = 'http://192.168.8.141:4000/api/FAQ';
+    }
+
+    axios.get(url)
+      .then(response => {
+        setFaqData(response.data);
+      })
+      .catch(error => {
+        console.log('Error fetching FAQ data:', error);
+      });
+  }, [language]);
+
   const toggleExpansion = (index) => {
     setExpanded((prevExpanded) => {
-      const newExpanded               = [...prevExpanded];
-      newExpanded[index]              = !newExpanded[index];
+      const newExpanded               = new Array(questions.length).fill(false);
+      newExpanded[index]              = !prevExpanded[index];
       return newExpanded;
     });
   };
+  
 
   const handlePress = () => {
     Linking.openURL('https://www.google.com');
@@ -83,51 +100,52 @@ export default function FAQ({ navigation,route  }) {
 
   const renderQuestion = (question, index) => {
     const rotation                    = expanded[index] ? "180deg" : "0deg";
-    const answerHeight                = expanded[index] ? 70: 0;
+    const answerHeight                = expanded[index] ? 70 : 0;
     const opacity                     = expanded[index] ? 1 : 0;
-
+  
     return (
-      
-      <View key                       = {question.id} style={styles.questionContainer}>
+      <View key                       = {index} style={styles.questionContainer}>
         <TouchableOpacity onPress     = {() => toggleExpansion(index)} style={styles.question}>
           <Animated.View style        = {[styles.icon, { transform: [{ rotate: rotation }] }]}>
-            <Icon name                = {expanded[index] ? "minus" : "plus"} size={20} color= {isDarkMode ? 'white' : 'darkblue'} />
+            <Icon name                = {expanded[index] ? "minus" : "plus"} size={20} color={isDarkMode ? 'white' : 'darkblue'} />
           </Animated.View>
-          <Text style                 = {[styles.questionText,isDarkMode && darkStyles.questionText]}>{question.question}</Text>
+          <Text style                 = {[styles.questionText, isDarkMode && darkStyles.questionText]}>{question.question}</Text>
         </TouchableOpacity>
         <Animated.View style          = {[styles.answer, { height: answerHeight, opacity: opacity }]}>
           <Text style                 = {[styles.answerText, isDarkMode && darkStyles.answerText]}>{question.answer}</Text>
-</Animated.View>
-</View>
-);
-};
+        </Animated.View>
+      </View>
+    );
+  };
+  
 
-return (
-<SafeAreaView style                   = {[styles.container,isDarkMode && darkStyles.container]}>
-<Circles />
-<ScrollView> 
-<Text>{currentMessages.greeting}</Text>
-      
-{fontLoaded ? (
-<>
-<View style                           = {styles.questionsContainer}>
-{questions.map((question, index) => renderQuestion(question, index))}
-</View>
-<View style                           = {styles.bottomContainer}>
-<TouchableOpacity
-           style                      = {styles.buttonContainer}
-           onPress                    = {handlePress}
-           activeOpacity              = {0.8}
-         >
-<Text style                           = {styles.buttonText}>Visit website</Text>
-</TouchableOpacity>
-</View>
-</>
-)                                     : null}
-      
-</ScrollView>
-</SafeAreaView>
-);
+  return (
+    <SafeAreaView style               = {[styles.container,isDarkMode && darkStyles.container]}>
+      <Circles />
+      <ScrollView> 
+        <Text>{currentMessages.greeting}</Text>
+        
+        {fontLoaded ? (
+          <>
+            <View style               = {styles.questionsContainer}>
+            {faqData.map((question, index) => renderQuestion(question, index, question.id))}
+
+            </View>
+            <View style               = {styles.bottomContainer}>
+              <TouchableOpacity
+                style                 = {styles.buttonContainer}
+                onPress               = {handlePress}
+                activeOpacity         = {0.8}
+              >
+                <Text style           = {styles.buttonText}>Visit website</Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        )                             : null}
+        
+      </ScrollView>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -202,7 +220,7 @@ const darkStyles = StyleSheet.create({
   container: {
     backgroundColor                   : '#333333',
     opacity                           : 0.7,
-    // other dark styles...
+    
   },
   questionText: {
     fontFamily                        : 'Poppins-Bold',

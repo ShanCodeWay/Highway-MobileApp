@@ -58,14 +58,14 @@ export default function Help_Support({ navigation,route }) {
 
   useEffect(() => {
     navigation.setOptions({
-      title                             : 'Help & Support', // Set Header Title
+      title                             : currentMessages.help,
       headerTintColor                   : isDarkMode ? 'white' : 'darkblue',
       headerStyle: {
         backgroundColor                 : isDarkMode ? 'grey' : 'white'
       },
       headerTitleStyle: {
-        fontWeight                      : 'bold', // Set font weight of navigation bar
-        fontFamily                      : 'Poppins-Bold', // Set font family of navigation bar
+        fontWeight                      : 'bold',
+        fontFamily                      : 'Poppins-Bold',
         fontSize                        : language === 'en' ? 30 : 20,
       },
       headerRight                       : () => (
@@ -265,7 +265,7 @@ const darkStyles = StyleSheet.create({
   container: {
     backgroundColor                     : '#333333',
     opacity                             : 0.6,
-    // other dark styles...
+   
   },
   dateTimeContainer: {
     position                            : 'absolute',

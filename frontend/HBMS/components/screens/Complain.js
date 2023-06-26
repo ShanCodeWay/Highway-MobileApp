@@ -123,14 +123,14 @@ export default function Complain({ navigation,route }) {
 
   useEffect(() => {
     navigation.setOptions({
-      title                                                                                                                                                                                                                                                     : "Complain", // Set Header Title
+      title                                                                                                                                                                                                                                                     : currentMessages.complain,
       headerTintColor                                                                                                                                                                                                                                           : isDarkMode ? 'white' : 'darkblue',
       headerStyle: {
-        backgroundColor                                                                                                                                                                                                                                         : isDarkMode ? 'grey' : 'white'
+        backgroundColor                                                                                                                                                                                                                                         : isDarkMode ? 'grey' : 'white',
       },
       headerTitleStyle: {
-        fontWeight                                                                                                                                                                                                                                              : "bold", // Set font weight of navigation bar
-        fontFamily                                                                                                                                                                                                                                              : "Poppins-Bold", // Set font family of navigation bar
+        fontWeight                                                                                                                                                                                                                                              : 'bold',
+        fontFamily                                                                                                                                                                                                                                              : 'Poppins-Bold',
         fontSize                                                                                                                                                                                                                                                : language === 'en' ? 30 : 20,
       },
       headerRight                                                                                                                                                                                                                                               : () => (
@@ -143,9 +143,9 @@ export default function Complain({ navigation,route }) {
           />
         </TouchableOpacity>
       ),
-      
     });
-  }, [navigation,isDarkMode]);
+  }, [navigation, isDarkMode]);
+  
 
 
   const handleSubmit = async () => {
@@ -399,7 +399,7 @@ const styles = StyleSheet.create({
     height                                                                                                                                                                                                                                                      : 50,
     backgroundColor                                                                                                                                                                                                                                             : '#bef',
     
-     // Change the background color of the Picker component here
+    
   },
   pickerItem: {
     color                                                                                                                                                                                                                                                       : 'darkblue',
@@ -444,7 +444,7 @@ const darkStyles = StyleSheet.create({
   container: {
     backgroundColor                                                                                                                                                                                                                                             : '#333333',
     opacity                                                                                                                                                                                                                                                     : 0.6,
-    // other dark styles...
+    
   },
   label: {
     fontSize                                                                                                                                                                                                                                                    : 18,

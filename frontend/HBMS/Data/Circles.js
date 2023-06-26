@@ -1,8 +1,16 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, {useState, useEffect, useRef } from 'react';
+import { View ,Animated,} from 'react-native';
+import * as Animatable from 'react-native-animatable';
+
 
 const Circles = () => {
+
+
+
+
   return (
+
+   
     <View
       style={{
         width             : 430,
@@ -22,6 +30,7 @@ const Circles = () => {
           backgroundColor : 'rgba(132, 206, 235, 0.3)',
         }}
       />
+      
       <View
         style={{
           position        : 'absolute',
@@ -34,6 +43,7 @@ const Circles = () => {
         }}
       />
     </View>
+    
   );
 };
 
