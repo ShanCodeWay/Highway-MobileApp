@@ -123,23 +123,23 @@ export default function Complain({ navigation,route }) {
 
   useEffect(() => {
     navigation.setOptions({
-      title                                                                                                                                                                                                                                                     : currentMessages.complain,
-      headerTintColor                                                                                                                                                                                                                                           : isDarkMode ? 'white' : 'darkblue',
+      title: currentMessages.complain, 
+      headerTintColor: isDarkMode ? 'white' : 'darkblue',
       headerStyle: {
-        backgroundColor                                                                                                                                                                                                                                         : isDarkMode ? 'grey' : 'white',
+        backgroundColor: isDarkMode ? 'grey' : 'white',
       },
       headerTitleStyle: {
-        fontWeight                                                                                                                                                                                                                                              : 'bold',
-        fontFamily                                                                                                                                                                                                                                              : 'Poppins-Bold',
-        fontSize                                                                                                                                                                                                                                                : language === 'en' ? 30 : 20,
+        fontWeight: 'bold', 
+        fontFamily: 'Poppins-Bold', 
+        fontSize: language === 'en' ? 30 : 20,
       },
-      headerRight                                                                                                                                                                                                                                               : () => (
-        <TouchableOpacity onPress                                                                                                                                                                                                                               = {() => navigation.navigate("Home")}>
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <FontAwesome5
-            name                                                                                                                                                                                                                                                = "home"
-            size                                                                                                                                                                                                                                                = {25}
-            color                                                                                                                                                                                                                                               = {isDarkMode ? 'white' : 'darkblue'}
-            style                                                                                                                                                                                                                                               = {styles.Home_icon}
+            name="home"
+            size={25}
+            color={isDarkMode ? 'white' : 'darkblue'}
+            style={styles.Home_icon}
           />
         </TouchableOpacity>
       ),
@@ -444,7 +444,7 @@ const darkStyles = StyleSheet.create({
   container: {
     backgroundColor                                                                                                                                                                                                                                             : '#333333',
     opacity                                                                                                                                                                                                                                                     : 0.6,
-    
+    // other dark styles...
   },
   label: {
     fontSize                                                                                                                                                                                                                                                    : 18,
