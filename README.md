@@ -55,9 +55,9 @@
                 <img src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif" alt="Giphy">
             </a>
         </div>
-        <div class="giphy" style="text-align: center; position: absolute; right: 0; top: 50%;">
+        <div class="giphy" style="text-align: center; position: absolute; right: 0; top: 250px;">
             <a href="https://giphy.com/gifs/screen-monitor-closeup-26tn33aiTi1jkl6H6" target="_blank" rel="noopener noreferrer">
-                <img src="https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif" alt="Giphy">
+                <img width="400" align="right" src="https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif" alt="Giphy">
             </a>
         </div>
     </div>
