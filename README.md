@@ -39,13 +39,16 @@
         </ul>
     </div>
         <div class="giphy" style="text-align: center; position: absolute; right: 0; top: 250px;">
-            <a href="https://github.com/ShanCodeWay/Highway-MobileApp/blob/main/Screenshot%20(338).png" target="_blank" rel="noopener noreferrer">
-                <img width="400" align="right" src="https://github.com/ShanCodeWay/Highway-MobileApp/blob/main/Screenshot%20(338).png" alt="Giphy">
-            </a>
-            <img align="right" alt="Coding" width="400" src="https://github.com/ShanCodeWay/Highway-MobileApp/blob/main/Screenshot%20(344).png">
-            <img align="right" alt="Coding" width="400" src="https://github.com/ShanCodeWay/Highway-MobileApp/blob/main/Screenshot%20(345).png">
-            <img align="right" alt="Coding" width="400" src="https://github.com/ShanCodeWay/Highway-MobileApp/blob/main/Screenshot%20(346).png">
-            <img align="right" alt="Coding" width="400" src="https://github.com/ShanCodeWay/Highway-MobileApp/blob/main/Screenshot%20(347).png">
+            <table>
+                <row> <column><img width="400" align="right" src="https://github.com/ShanCodeWay/Highway-MobileApp/blob/main/Screenshot%20(338).png" ></column> 
+                     <column> <img align="right" alt="Coding" width="400" src="https://github.com/ShanCodeWay/Highway-MobileApp/blob/main/Screenshot%20(344).png"></column> 
+            </row>
+              <row>
+                   <column> <img align="right" alt="Coding" width="400" src="https://github.com/ShanCodeWay/Highway-MobileApp/blob/main/Screenshot%20(345).png"></column>
+                   <column><img align="right" alt="Coding" width="400" src="https://github.com/ShanCodeWay/Highway-MobileApp/blob/main/Screenshot%20(346).png"></column> 
+             </row>
+            <row><img align="right" alt="Coding" width="400" src="https://github.com/ShanCodeWay/Highway-MobileApp/blob/main/Screenshot%20(347).png"> </row>
+            </table>
         </div>
     </div>
 </body>
